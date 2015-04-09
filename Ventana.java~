@@ -1,0 +1,7 @@
+public class Ventaja{
+
+	public void resultados(String respuesta){
+	}
+
+
+}
