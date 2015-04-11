@@ -7,6 +7,7 @@
 import java.awt.Component;
 import java.io.File;
 import static java.lang.System.exit;
+import java.util.Vector;
 import javax.swing.JFileChooser;
 
 /**
@@ -18,10 +19,12 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Creates new form Ventana
      */
-    Lectura lecutra;
+    Lectura lectura;
+    Logica logica;
     public Ventana() {
         initComponents();
-        lecutra = new Lectura();
+        lectura = new Lectura();
+        logica = new Logica();
     }
 
     /**
@@ -143,6 +146,23 @@ public class Ventana extends javax.swing.JFrame {
             //This is where a real application would open the file.
             tf_dir.setText(file.getAbsolutePath());
             lectura.lecturaArchivo();
+            double cx1 = lectura.getCx1();
+            double cy1= lectura.getCy1();
+            double r1 = lectura.getR1();
+            double cx2 = lectura.getCx2();
+            double cy2 = lectura.getCy2();
+            double r2 = lectura.getR2();
+            Vector<Vector<Double>> puntos = lectura.getPuntos();
+            
+            Vector<String> sol = logica.solucion(cx1,cy1,r1,cx2,cy2,r2,puntos);
+            
+            ta_respuesta.setText("");
+            
+            for (int i = 0; i < puntos.size() ; i++){
+                ta_respuesta.append("("+puntos.get(i).get(0)+","+puntos.get(i).get(1)+")"+"->"+sol.get(i));
+            }
+            
+            
         } else {
             System.out.println("archivo NO abierto ");
         }
