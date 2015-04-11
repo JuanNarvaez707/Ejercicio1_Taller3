@@ -145,7 +145,7 @@ public class Ventana extends javax.swing.JFrame {
             File file = fc.getSelectedFile();
             //This is where a real application would open the file.
             tf_dir.setText(file.getAbsolutePath());
-            lectura.lecturaArchivo();
+            lectura.lecturaArchivo(file);
             double cx1 = lectura.getCx1();
             double cy1= lectura.getCy1();
             double r1 = lectura.getR1();
@@ -159,7 +159,7 @@ public class Ventana extends javax.swing.JFrame {
             ta_respuesta.setText("");
             
             for (int i = 0; i < puntos.size() ; i++){
-                ta_respuesta.append("("+puntos.get(i).get(0)+","+puntos.get(i).get(1)+")"+"->"+sol.get(i));
+                ta_respuesta.append("("+puntos.get(i).get(0)+","+puntos.get(i).get(1)+")"+"->"+sol.get(i)+"\n");
             }
             
             

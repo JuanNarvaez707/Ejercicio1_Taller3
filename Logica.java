@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
 
 import java.util.Vector;
 
@@ -12,18 +11,10 @@ import java.util.Vector;
  * @author juancans
  */
 public class Logica {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-
-    public Vector<String> solucion(double cA1, double cA2 , double rA , double cB1, double cB2 , double rB , Vector<Vector<Integer>> puntos){
+    public Vector<String> solucion(double cA1, double cA2 , double rA , double cB1, double cB2 , double rB , Vector<Vector<Double>> puntos){
 		
         Vector<String> resultado = new Vector<String>();
-        int tam = resultado.size();
+        int tam = puntos.size();
         double calculoFormula;
              
 	for(int i = 0 ; i < tam ; i++){
@@ -33,10 +24,10 @@ public class Logica {
             if(calculoFormula <= rA && calculoFormula <= rB){
                 resultado.add("Dentro de ambas circunferencias");
             }else{
-		if(calculoFormula <= rA){
+		if(calculoFormula <= Math.pow(rA,2)){
 			resultado.add("Dentro de la circunferencia 1");
 		}else{
-			if( calculoFormula <= rB){
+			if( calculoFormula <= Math.pow(rB,2)){
 				resultado.add("Dentro de la circunferencia 2");			
 			}else{
 				resultado.add("Por fuera de ambas circunferencias");
