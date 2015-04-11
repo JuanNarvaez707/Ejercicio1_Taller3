@@ -1,4 +1,147 @@
-public class Lectura{
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Vector;
 
+/**
+ *
+ * @author alvaroms
+ * Clase para leer archivos y asignar valores de los puntos cx1, cy1, r1, cx2, cy2 y r2
+ */
+public class Lectura {
+
+    double cx1;
+    double cy1;
+    double r1;
+    double cx2;
+    double cy2;
+    double r2;
+    Vector<Vector<Double>> puntos;
+
+    public Lectura() {
+        puntos = new Vector<>();
+    }
+    
+    
+
+    public double getCx1() {
+        return cx1;
+    }
+
+    public void setCx1(double cx1) {
+        this.cx1 = cx1;
+    }
+
+    public double getCy1() {
+        return cy1;
+    }
+
+    public void setCy1(double cy1) {
+        this.cy1 = cy1;
+    }
+
+    public double getR1() {
+        return r1;
+    }
+
+    public void setR1(double r1) {
+        this.r1 = r1;
+    }
+
+    public double getCx2() {
+        return cx2;
+    }
+
+    public void setCx2(double cx2) {
+        this.cx2 = cx2;
+    }
+
+    public double getCy2() {
+        return cy2;
+    }
+
+    public void setCy2(double cy2) {
+        this.cy2 = cy2;
+    }
+
+    public double getR2() {
+        return r2;
+    }
+
+    public void setR2(double r2) {
+        this.r2 = r2;
+    }
+
+    public Vector<Vector<Double>> getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(Vector<Vector<Double>> puntos) {
+        this.puntos = puntos;
+    }
+
+    public void lecturaArchivo(File archivoLeer) {
+
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+
+            fr = new FileReader(archivoLeer);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea;
+            linea = br.readLine();
+            
+            String[] token = linea.split("[(),;]");
+            cx1 = Double.parseDouble(token[1]);
+            cy1 = Double.parseDouble(token[2]);
+            r1 = Double.parseDouble(token[3]);
+            cx2 = Double.parseDouble(token[5]);
+            cy2 = Double.parseDouble(token[6]);
+            r2 = Double.parseDouble(token[7]);
+            
+            //Debug para observar los valores de los puntos
+            //System.out.println("Puntos "+cx1+" "+cy1+" "+r1+" Puntos "+cx2+" "+cy2+" "+r2);
+            
+            
+            while ((linea = br.readLine()) != null) {
+                token  = linea.split("[(),]");
+                Vector <Double> punto = new Vector<>();
+                punto.add(Double.parseDouble(token[1]));
+                punto.add(Double.parseDouble(token[2]));
+                puntos.add(punto);
+                //Debug del punto a evaluar
+                //System.out.println("Punto "+punto.get(0)+" "+punto.get(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+    }
+    
+    /*
+     public static void main(String[] args) {
+        File archivo = new File("texto.txt");
+        Lectura miObjLeer = new Lectura();
+        miObjLeer.lecturaArchivo(archivo);
+    }*/
+
+    
 }
+

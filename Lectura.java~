@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package taller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +7,7 @@ import java.util.Vector;
 /**
  *
  * @author alvaroms
+ * Clase para leer archivos y asignar valores de los puntos
  */
 public class Lectura {
 
@@ -23,6 +18,12 @@ public class Lectura {
     double cy2;
     double r2;
     Vector<Vector<Double>> puntos;
+
+    public Lectura() {
+        puntos = new Vector<>();
+    }
+    
+    
 
     public double getCx1() {
         return cx1;
@@ -96,10 +97,26 @@ public class Lectura {
             String linea;
             linea = br.readLine();
             
-            String[] token = linea.split("(,)");
+            String[] token = linea.split("[(),;]");
+            cx1 = Double.parseDouble(token[1]);
+            cy1 = Double.parseDouble(token[2]);
+            r1 = Double.parseDouble(token[3]);
+            cx2 = Double.parseDouble(token[5]);
+            cy2 = Double.parseDouble(token[6]);
+            r2 = Double.parseDouble(token[7]);
+            
+            //Debug para observar los valores de los puntos
+            //System.out.println("Puntos "+cx1+" "+cy1+" "+r1+" Puntos "+cx2+" "+cy2+" "+r2);
+            
             
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
+                token  = linea.split("[(),]");
+                Vector <Double> punto = new Vector<>();
+                punto.add(Double.parseDouble(token[1]));
+                punto.add(Double.parseDouble(token[2]));
+                puntos.add(punto);
+                //Debug del punto a evaluar
+                //System.out.println("Punto "+punto.get(0)+" "+punto.get(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,8 +134,14 @@ public class Lectura {
         }
 
     }
-
-
+    
+    /*
+     public static void main(String[] args) {
+        File archivo = new File("texto.txt");
+        Lectura miObjLeer = new Lectura();
+        miObjLeer.lecturaArchivo(archivo);
+    }*/
 
     
 }
+
