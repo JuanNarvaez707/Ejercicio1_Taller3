@@ -7,7 +7,7 @@ import java.util.Vector;
 /**
  *
  * @author alvaroms
- * Clase para leer archivos y asignar valores de los puntos cx1, cy1, r1, cx2, cy2 y r2
+ * Clase para leer archivos y asignar valores de los puntos
  */
 public class Lectura {
 
